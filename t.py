@@ -51,8 +51,11 @@ class Todo(object):
         self.arg = docopt(__doc__, version=0.10)
         # Create a path to store the database file
         db_path = os.path.expanduser("~/")
-        db_path = db_path + "/" + ".t-db"
-        self.db = sqlite3.connect(db_path)
+        self.db_path = db_path + "/" + ".t-db"
+        self.init_db()
+
+    def init_db(self):
+        self.db = sqlite3.connect(self.db_path)
         self.cursor = self.db.cursor()
         self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS todo(id INTEGER PRIMARY KEY, task TEXT,
@@ -90,18 +93,6 @@ class Todo(object):
             return False
         return True
 
-    def _is_done(self, id):
-        """
-        Checks if the task has already been marked as done
-        """
-        self.cursor.execute('''
-            SELECT done FROM todo WHERE id=?
-          ''', (id,))
-        record = self.cursor.fetchone()
-        if record == 0:
-            return False
-        return True
-
     def add_task(self):
         """
         Add a task todo to the db
@@ -124,14 +115,11 @@ class Todo(object):
         date = datetime.datetime.now()
         date_now = "%s-%s-%s" % (date.day, date.month, date.year)
         if self._record_exists(task_id):
-            if self._is_done(task_id):
-                echo("You have already checked this task as done")
-            else:
-                self.cursor.execute('''
-                    UPDATE todo SET done=?, date_completed=? WHERE Id=?
-                ''', (1, date_now, int(task_id)))
-                echo("Task %s has been marked as done" % str(task_id))
-                self.db.commit()
+            self.cursor.execute('''
+                UPDATE todo SET done=?, date_completed=? WHERE Id=?
+            ''', (1, date_now, int(task_id)))
+            echo("Task %s has been marked as done" % str(task_id))
+            self.db.commit()
         else:
             echo("Task %s doesn't exist" % (str(task_id)), err=True)
 
@@ -199,11 +187,7 @@ class Todo(object):
         self.db.commit()
 
     def __del__(self):
-        """
-        Close db connection when destroying object
-        """
         self.db.close()
-
 
 def main():
     """
@@ -211,7 +195,6 @@ def main():
     """
     app = Todo()
     app.run()
-
 
 if __name__ == "__main__":
     main()

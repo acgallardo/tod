@@ -1,11 +1,11 @@
 from setuptools import setup
 
 setup(
-    name='t',
+    name='pytodo',
     version='0.10',
-    py_modules=['t'],
-    description='t is a unix command-line todo app',
-    url='http://github.com/itsnauman/t',
+    py_modules=['pytodo'],
+    description='pytodo is a simple command-line todo application',
+    url='http://github.com/itsnauman/pytodo',
     author='Nauman Ahmad',
     author_email='nauman-ahmad@outlook.com',
     license='MIT',
@@ -17,6 +17,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        t=t:main
+        t=pytodo:main
     ''',
 )

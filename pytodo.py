@@ -1,4 +1,4 @@
-"""t, a simple command line todo application
+"""pytodo, a simple command line todo application
 
 Usage:
   t  add <task>

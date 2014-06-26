@@ -10,13 +10,13 @@ Usage:
 -------
 The $ sign used below shows that we are in the terminal, its not a part of the command.
 
-~ Add a task using, $ t add "Buy Bugatti Veryon" (a string is passed in)
-~ Check as task as done by specifying the id, $ t check 1
-~ Uncheck a task again by, $ t uncheck 1
-~ List all pending tasks, $ t ls
-~ List all tasks, $ t ls --all
-~ Flush the database, $ t clear
-~ For more help, $ t --help
+- Add a task using, $ t add "Buy Bugatti Veryon" (a string is passed in)
+- Check as task as done by specifying the id, $ t check 1
+- Uncheck a task again by, $ t uncheck 1
+- List all pending tasks, $ t ls
+- List all tasks, $ t ls --all
+- Flush the database, $ t clear
+- For more help, $ t --help
 
 License:
 ---------

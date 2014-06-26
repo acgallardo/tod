@@ -20,4 +20,8 @@ The $ sign used below shows that we are in the terminal, its not a part of the c
 
 License:
 ---------
+<<<<<<< HEAD:README
 pytodo is distributed under MIT license, see LICENSE for more details
+=======
+t is distributed under MIT license, see LICENSE for more details
+>>>>>>> FETCH_HEAD:README.txt

@@ -1,4 +1,4 @@
-"""t, a unix command-line todo application
+"""t, a simple command line todo application
 
 Usage:
   t  add <task>
@@ -107,6 +107,16 @@ class Todo(object):
         self.db.commit()
         echo("The task has been been added to the list")
 
+    def _is_done(self, id):
+        self.cursor.execute('''
+                SELECT done FROM todo WHERE id=?
+            ''', (id,))
+        record = self.cursor.fetchone()
+        if record[0] == 0:
+            return
+        else:
+            return True
+
     def check_task(self):
         """
         Mark a task as done
@@ -115,11 +125,14 @@ class Todo(object):
         date = datetime.datetime.now()
         date_now = "%s-%s-%s" % (date.day, date.month, date.year)
         if self._record_exists(task_id):
-            self.cursor.execute('''
-                UPDATE todo SET done=?, date_completed=? WHERE Id=?
-            ''', (1, date_now, int(task_id)))
-            echo("Task %s has been marked as done" % str(task_id))
-            self.db.commit()
+            if self._is_done(task_id):
+                echo("The task is already done", err=True)
+            else:
+                self.cursor.execute('''
+                    UPDATE todo SET done=?, date_completed=? WHERE Id=?
+                ''', (1, date_now, int(task_id)))
+                echo("Task %s has been marked as done" % str(task_id))
+                self.db.commit()
         else:
             echo("Task %s doesn't even exist" % (str(task_id)), err=True)
 
@@ -129,11 +142,14 @@ class Todo(object):
         """
         task_id = self.arg['<id>']
         if self._record_exists(task_id):
-            self.cursor.execute('''
-                UPDATE todo SET done=? WHERE id=?
-              ''', (0, int(task_id)))
-            echo("Task %s has been unchecked" % str(task_id))
-            self.db.commit()
+            if self._is_done(task_id):
+                self.cursor.execute('''
+                    UPDATE todo SET done=? WHERE id=?
+                  ''', (0, int(task_id)))
+                echo("Task %s has been unchecked" % str(task_id))
+                self.db.commit()
+            else:
+                echo("The task is already pending", err=True)
         else:
             echo("Task %s doesn't exist" % str(task_id), err=True)
 
@@ -188,6 +204,7 @@ class Todo(object):
 
     def __del__(self):
         self.db.close()
+
 
 def main():
     """

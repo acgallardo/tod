@@ -48,11 +48,11 @@ class Todo(object):
         """
         Set up the db and docopt upon creation of object
         """
-        self.arg = docopt(__doc__, version=0.10)
         # Create a path to store the database file
         db_path = os.path.expanduser("~/")
         self.db_path = db_path + "/" + ".t-db"
         self.init_db()
+        self.arg = docopt(__doc__, version=0.10)
 
     def init_db(self):
         self.db = sqlite3.connect(self.db_path)

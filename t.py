@@ -1,13 +1,13 @@
 """t, a unix command-line todo application
 
 Usage:
-  t   add <task>
-  t   check <id>
-  t   uncheck <id>
-  t   clear
-  t   ls [--all]
-  t   -h | --help
-  t   --version
+  t  add <task>
+  t  check <id>
+  t  uncheck <id>
+  t  clear
+  t  ls [--all]
+  t  -h | --help
+  t  --version
 
 Commands:
   add           Add a new task
@@ -51,10 +51,10 @@ class Todo(object):
         # Create a path to store the database file
         db_path = os.path.expanduser("~/")
         self.db_path = db_path + "/" + ".t-db"
-        self.init_db()
+        self._init_db()
         self.arg = docopt(__doc__, version=0.10)
 
-    def init_db(self):
+    def _init_db(self):
         self.db = sqlite3.connect(self.db_path)
         self.cursor = self.db.cursor()
         self.cursor.execute('''
@@ -121,7 +121,7 @@ class Todo(object):
             echo("Task %s has been marked as done" % str(task_id))
             self.db.commit()
         else:
-            echo("Task %s doesn't exist" % (str(task_id)), err=True)
+            echo("Task %s doesn't even exist" % (str(task_id)), err=True)
 
     def uncheck_task(self):
         """

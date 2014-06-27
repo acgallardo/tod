@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='pytodo',
-    version='0.10',
+    version='0.20',
     py_modules=['pytodo'],
     description='pytodo is a simple command-line todo application',
     url='http://github.com/itsnauman/pytodo',

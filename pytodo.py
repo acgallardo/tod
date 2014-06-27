@@ -52,7 +52,7 @@ class Todo(object):
         db_path = os.path.expanduser("~/")
         self.db_path = db_path + "/" + ".t-db"
         self._init_db()
-        self.arg = docopt(__doc__, version=0.10)
+        self.arg = docopt(__doc__, version=0.20)
 
     def _init_db(self):
         self.db = sqlite3.connect(self.db_path)

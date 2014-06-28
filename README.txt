@@ -1,4 +1,4 @@
-$ _pytodo, a simple command line todo application
+$ pytodo_
 
 pytodo - t for short - is a command line todo app for mac and linux. It stores all the tasks in a sqlite database and you can interact with the app using the terminal (see Usage).
 

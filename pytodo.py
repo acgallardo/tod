@@ -5,6 +5,7 @@ Usage:
   t  check <id>
   t  uncheck <id>
   t  clear
+  t  count
   t  ls [--all]
   t  -h | --help
   t  --version
@@ -75,6 +76,8 @@ class Todo(object):
             self.uncheck_task()
         elif self.arg['clear']:
             self.clear_task()
+        elif self.arg['count']:
+            self.count_task()
         else:
             if self.arg['--all']:
                 self.list_task()
@@ -204,6 +207,17 @@ class Todo(object):
           ''')
         self.db.commit()
 
+    def count_task(self):
+        self.cursor.execute('''
+            SELECT id FROM todo
+            ''')
+        records = self.cursor.fetchall()
+        num = len(records)
+        if num == 1:
+            echo("%s tasks is still pending" % str(num))
+        else:
+            echo("%s tasks are still pending" % str(num))
+
     def __del__(self):
         """
         Close database connection when destroying the object
@@ -217,3 +231,6 @@ def main():
     """
     app = Todo()
     app.run()
+
+if __name__ == "__main__":
+    main()

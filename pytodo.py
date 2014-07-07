@@ -123,6 +123,7 @@ class Todo(object):
         """
         task_id = self.arg['<id>']
         date = datetime.datetime.now()
+        # format todays date into a string for sqlite database
         date_now = "%s-%s-%s" % (date.day, date.month, date.year)
         if self._record_exists(task_id):
             if self._is_done(task_id):
@@ -142,6 +143,7 @@ class Todo(object):
         """
         task_id = self.arg['<id>']
         if self._record_exists(task_id):
+            # Checks if the task is marked as done
             if self._is_done(task_id):
                 self.cursor.execute('''
                     UPDATE todo SET done=? WHERE id=?
@@ -203,6 +205,9 @@ class Todo(object):
         self.db.commit()
 
     def __del__(self):
+        """
+        Close database connection when destroying the object
+        """
         self.db.close()
 
 

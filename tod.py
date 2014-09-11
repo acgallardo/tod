@@ -1,4 +1,4 @@
-"""pytodo, a simple command line todo application
+"""tod, a simple command line todo application
 
 Usage:
   t  add <task>
@@ -43,7 +43,7 @@ def echo(msg, err=False):
         print colored(msg + " " + SMILEY, "cyan")
 
 
-class Todo(object):
+class Tod(object):
 
     def __init__(self):
         """
@@ -51,11 +51,14 @@ class Todo(object):
         """
         # Create a path to store the database file
         db_path = os.path.expanduser("~/")
-        self.db_path = db_path + "/" + ".t-db"
+        self.db_path = db_path + "/" + ".tod_file"
         self._init_db()
-        self.arg = docopt(__doc__, version=0.20)
+        self.arg = docopt(__doc__, version=0.21)
 
     def _init_db(self):
+        """
+        Setup database
+        """
         self.db = sqlite3.connect(self.db_path)
         self.cursor = self.db.cursor()
         self.cursor.execute('''
@@ -111,6 +114,9 @@ class Todo(object):
         echo("The task has been been added to the list")
 
     def _is_done(self, id):
+        """
+        Check if task is done
+        """
         self.cursor.execute('''
                 SELECT done FROM todo WHERE id=?
             ''', (id,))
@@ -208,6 +214,9 @@ class Todo(object):
         self.db.commit()
 
     def count_task(self):
+        """
+        Count the number of tasks
+        """
         self.cursor.execute('''
             SELECT id FROM todo
             ''')
@@ -229,7 +238,7 @@ def main():
     """
     Entry point for console script
     """
-    app = Todo()
+    app = Tod()
     app.run()
 
 if __name__ == "__main__":

@@ -1,10 +1,10 @@
-`$ todo_`
+`$ tod_`
 ============
 
-todo is a command line todo app for `unix`. It stores all the tasks in a sqlite database and you can interact with the app using the terminal (see Usage).
+`tod` is a command line todo app for `unix`. It stores all the tasks in a sqlite database and you can interact with the app using the terminal (see Usage).
 
 ### Installation:
-`todo` can be installed from pypi using `pip install pytodo`.
+`tod` can be installed from `pypi` using `pip install pytodo`.
 
 ### Usage:
 ```
@@ -40,4 +40,4 @@ Options:
 
 License:
 ---------
-`todo` is distributed under MIT license, see `LICENSE` for more details
+`tod` is distributed under MIT license, see `LICENSE` for more details

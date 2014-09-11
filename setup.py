@@ -2,10 +2,10 @@ from setuptools import setup
 
 setup(
     name='pytodo',
-    version='0.20',
+    version='0.21',
     py_modules=['pytodo'],
-    description='pytodo is a simple command-line todo application',
-    url='http://github.com/itsnauman/pytodo',
+    description='Todo lists for your terminal',
+    url='http://github.com/itsnauman/tod',
     author='Nauman Ahmad',
     author_email='nauman-ahmad@outlook.com',
     license='MIT',
@@ -17,6 +17,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        t=pytodo:main
+        t=tod:main
     ''',
 )

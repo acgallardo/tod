@@ -148,7 +148,7 @@ class Tod(object):
 
     def uncheck_task(self):
         """
-        Mark as done task as undone
+        Mark a done task as undone
         """
         task_id = self.arg['<id>']
         if self._record_exists(task_id):

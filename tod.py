@@ -223,7 +223,7 @@ class Tod(object):
         records = self.cursor.fetchall()
         num = len(records)
         if num == 1:
-            echo("%s tasks is still pending" % str(num))
+            echo("%s task is still pending" % str(num))
         else:
             echo("%s tasks are still pending" % str(num))
 

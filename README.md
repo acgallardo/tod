@@ -1,7 +1,7 @@
-`$ tod_`
+$ tod_
 ============
 
-`tod` is a command line todo app for `unix`. It stores all the tasks in a sqlite database and you can interact with the app using the terminal (see Usage).
+`tod` is a command line todo app for `unix` based OS's. It stores all the tasks in a sqlite database and you can interact with the app using the terminal (see Usage).
 
 ### Installation:
 `tod` can be installed from `pypi` using `pip install pytodo`.
